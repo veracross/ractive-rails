@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ractive-rails (0.0.1)
+    ractive-rails (0.3.0)
       execjs (>= 2.0.2)
       sprockets (>= 2.0, < 4)
       tilt (>= 1.4.1)
