@@ -4,7 +4,7 @@ ractive-rails
 ### Server side
 
 ```ruby
-gem ractive-rails
+gem 'ractive-rails'
 ```
 
 ### Extensions supported
