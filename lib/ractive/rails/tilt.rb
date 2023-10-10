@@ -6,15 +6,25 @@ module Ractive
         'application/javascript'
       end
 
+      def self.ractive_template(file_name, source_data)
+        <<-TEMPLATE
+          this.RactiveTemplates || (this.RactiveTemplates = {});
+          this.RactiveTemplates['#{file_name}'] = #{Ractive.parse(source_data).to_json};
+        TEMPLATE
+      end
+
+      def self.call(input)
+        file_name = input[:name]
+        ractive_output = input[:data]
+        { data: ractive_template(file_name, ractive_output) }
+      end
+
       def prepare
 
       end
 
       def evaluate(scope, locals, &block)
-        <<-TEMPLATE
-          this.RactiveTemplates || (this.RactiveTemplates = {});
-          this.RactiveTemplates['#{scope.logical_path}'] = #{Ractive.parse(data).to_json};
-        TEMPLATE
+        ractive_template(scope.logical_path, data)
       end
     end
   end
